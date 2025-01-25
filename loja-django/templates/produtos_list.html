@@ -1,26 +1,76 @@
-
-{% extends 'base.html' %}
+{% extends './components/base.html' %}
 {% block title %} Lista de Produtos {% endblock title %}
-    {% block conteudo %}
-    <h1>Lista de Produtos</h1>
+{% block conteudo %}
+
+
+
+<main>
+
+    <section class="py-1 text-center container">
+        <div class="row py-lg-2">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <h1 class="fw-light">Lista de Produtos</h1>
+                <p>
+                    <a href="{% url 'product-create' %}" class="btn btn-primary my-2">Novo Produto</a>
+
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <div class="album py-5 bg-body-tertiary">
+        <div class="container">
+
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                {% for product in products %}
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <svg class="bd-placeholder-img card-img-top"  width="100%" height="225"
+                            xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail"
+                            preserveAspectRatio="xMidYMid slice" focusable="false">
+                            <title>Placeholder</title>
+                            <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
+                                dy=".3em">{{product.name}}</text>
+                                <img src="{{product.get_id}}" alt="">
+                        </svg>
+                        <div class="card-body">
+                            <h4>{{product.name}}</h4>
+                            <p class="card-text">{{product.description}}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <a href="{% url 'product-detail' product.pk %}"><i class="bi bi-eye"></i></a>
+                                    <a href="{% url 'product-update' product.pk %}"> <i class="bi bi-pencil-square"></i></a>
+                                    <a href="{% url 'product-delete' product.pk %}"><i class="bi bi-trash"></i></a>
+                                </div>
+                                <small class="text-body-secondary">{{product.rating}}</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+</main>
 
 <table border="1px">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nome</th>
-                <th>Marca</th>
-                <th>Categoria</th>
-                <th>Descrição</th>
-                <th>Avaliação</th>
-                <th>Preço</th>
-                <th >Qtd. Estoque</th>
-                <th>Criado em</th>
-                <th>User</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-    
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Marca</th>
+            <th>Categoria</th>
+            <th>Descrição</th>
+            <th>Avaliação</th>
+            <th>Preço</th>
+            <th>Qtd. Estoque</th>
+            <th>Criado em</th>
+            <th>User</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+
     <tbody>
 
         {% for product in products %}
@@ -41,7 +91,7 @@
                 <a href="{% url 'product-detail' product.pk %}"><i class="bi bi-eye"></i></a>
                 <a href="{% url 'product-delete' product.pk %}"><i class="bi bi-trash"></i></a>
             </td>
-            
+
         </tr>
 
         {% empty %}
@@ -52,4 +102,4 @@
         {% endfor %}
     </tbody>
 </table>
-    {% endblock conteudo%}
+{% endblock conteudo%}
