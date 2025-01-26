@@ -25,14 +25,8 @@
                 {% for product in products %}
                 <div class="col">
                     <div class="card shadow-sm">
-                        <svg class="bd-placeholder-img card-img-top"  width="100%" height="225"
-                            xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail"
-                            preserveAspectRatio="xMidYMid slice" focusable="false">
-                            <title>Placeholder</title>
-                            <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef"
-                                dy=".3em">{{product.name}}</text>
-                                <img src="{{product.get_id}}" alt="">
-                        </svg>
+                        <img src="{{product.image}}" alt="" width="100%" height="225">
+                        
                         <div class="card-body">
                             <h4>{{product.name}}</h4>
                             <p class="card-text">{{product.description}}</p>
@@ -54,52 +48,5 @@
 
 </main>
 
-<table border="1px">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>Marca</th>
-            <th>Categoria</th>
-            <th>Descrição</th>
-            <th>Avaliação</th>
-            <th>Preço</th>
-            <th>Qtd. Estoque</th>
-            <th>Criado em</th>
-            <th>User</th>
-            <th>Ações</th>
-        </tr>
-    </thead>
 
-    <tbody>
-
-        {% for product in products %}
-
-        <tr>
-            <td>{{product.get_id}}</td>
-            <td>{{product.name}}</td>
-            <td>{{product.brand}}</td>
-            <td>{{product.category}}</td>
-            <td>{{product.description}}</td>
-            <td>{{product.rating}}</td>
-            <td>{{product.price}}</td>
-            <td>{{product.countInStock}}</td>
-            <td>{{product.createdAt}}</td>
-            <td>{{product.user}}</td>
-            <td>
-                <a href="{% url 'product-update' product.pk %}"><i class="bi bi-pencil-square"></i></a>
-                <a href="{% url 'product-detail' product.pk %}"><i class="bi bi-eye"></i></a>
-                <a href="{% url 'product-delete' product.pk %}"><i class="bi bi-trash"></i></a>
-            </td>
-
-        </tr>
-
-        {% empty %}
-
-        <tr>
-            <td colspan="10"> Nenhum Produto Encontrado</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
 {% endblock conteudo%}
